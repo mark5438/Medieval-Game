@@ -1,5 +1,20 @@
+# $(wildcard *.cpp /xxx/xxx/*.cpp): get all .cpp files from the current directory and dir "/xxx/xxx/"
+SRCS := $(wildcard *.cpp)
+# $(patsubst %.cpp,%.o,$(SRCS)): substitute all ".cpp" file name strings to ".o" file name strings
+OBJS := $(patsubst %.cpp,%.o,$(SRCS))	
+
+TARGET := DEBUG
+CC := g++
+CFLAGS := -Wall -g
+
 default:
-	g++ -c textures.cpp main.cpp map_loader.cpp -I SFML-2.5.1/include
-	g++ main.o textures.o map_loader.o -o build/sfml-app -L SFML-2.5.1//lib -lsfml-graphics -lsfml-window -lsfml-system
-	$(RM) main.o
+	g++ -c $(SRCS) -I SFML-2.5.1/include
+	g++ $(OBJS) -o build/sfml-app -L SFML-2.5.1//lib -lsfml-graphics -lsfml-window -lsfml-system
+	$(RM) *.o
 	./build/sfml-app
+
+all: $(TARGET)
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $^ -I SFML-2.5.1/include
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -L SFML-2.5.1//lib -lsfml-graphics -lsfml-window -lsfml-system

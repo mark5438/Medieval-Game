@@ -18,7 +18,7 @@ int main()
 
         window.clear();
         
-        window.draw(get_grass_sprite());
+        window.draw(get_sprite(45));
 
         window.display();
     }

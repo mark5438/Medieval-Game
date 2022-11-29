@@ -1,0 +1,3 @@
+*.o
+textures.o
+build/sfml-app

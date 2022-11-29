@@ -21,6 +21,7 @@ private:
 
     void load_xml_document();
     int get_integer_attribute(const char *, int);
+    void initialize_tilesets();
 
     std::list<Tileset*> tilesets;
 

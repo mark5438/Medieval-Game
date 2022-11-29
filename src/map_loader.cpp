@@ -10,13 +10,18 @@ Map::Map(const char *file_path)
     this->tile_width = this->get_integer_attribute("tilewidth", 9);
     this->tile_height = this->get_integer_attribute("tileheight", 10);
 
+    this->initialize_tilesets();
+}
+
+void Map::initialize_tilesets()
+{
     rapidxml::xml_node<> *tileset_node = this->root_node->first_node("tileset", 7);
 
     while (tileset_node)
     {
         char *tileset_source = tileset_node->first_attribute("source", 6)->value();
         unsigned int firstgid = atoi(tileset_node->first_attribute("firstgid", 8)->value());
-        Tileset * tileset = new Tileset(tileset_source, firstgid);
+        Tileset *tileset = new Tileset(tileset_source, firstgid);
         this->tilesets.push_back(tileset);
         tileset_node = tileset_node->next_sibling("tileset", 7);
     };

@@ -13,12 +13,10 @@ Map::Map(const char *file_path)
 
 void Map::load_xml_document()
 {
-    std::ifstream map_file(file_path);
+    std::ifstream map_file(this->file_path);
     std::vector<char> buffer((std::istreambuf_iterator<char>(map_file)), std::istreambuf_iterator<char>());
     buffer.push_back('\0');
-
     this->doc.parse<0>(&buffer[0]);
-
     this->root_node = doc.first_node("map");
 }
 

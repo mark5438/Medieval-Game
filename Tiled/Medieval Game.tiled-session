@@ -27,6 +27,14 @@
                 "x": 77.55695588948137,
                 "y": 124.68357839177035
             }
+        },
+        "starting_map.tmx": {
+            "scale": 0.7854,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 356.5062388591801,
+                "y": 605.423987776929
+            }
         }
     },
     "last.imagePath": "/home/markus/Medieval Game/Assets/Terrain",
@@ -40,6 +48,7 @@
     ],
     "project": "Medieval Game.tiled-project",
     "recentFiles": [
+        "starting_map.tmx",
         "Decorations.tsx",
         "Fence.tsx",
         "Terrain.tsx",

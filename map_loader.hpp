@@ -1,7 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <list>
+
 #include "rapidxml-1.13/rapidxml.hpp"
+
+#include "tileset.hpp"
 
 class Map
 {
@@ -17,6 +21,8 @@ private:
 
     void load_xml_document();
     int get_integer_attribute(const char *, int);
+
+    std::list<Tileset*> tilesets;
 
 public:
     /*

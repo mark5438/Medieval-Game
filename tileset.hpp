@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <list>
+#include <string.h>
+#include <stdio.h>
 
 #include <SFML/Graphics.hpp>
 
@@ -13,8 +16,8 @@ private:
     unsigned int tile_height;
     unsigned int tile_count;
     unsigned int columns;
-    const char* file_path;
-    const char* image_file_path;
+    char* file_path;
+    char* image_file_path;
     unsigned int image_width;
     unsigned int image_height;
 
@@ -25,9 +28,13 @@ private:
     void init();
     int get_integer_attribute(const char *, int);
 
-    std::vector<sf::Texture> textures;
-    std::vector<sf::Sprite> sprites;
+    sf::Texture texture;
+    std::list<sf::Sprite*> sprites;
+
+    void load_image();
+
+    unsigned int firstgid;
 
 public:
-    static Tileset load_tileset(char* file_path);
+    Tileset(char*, int);
 };

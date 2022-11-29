@@ -44,18 +44,25 @@ int Tileset::get_integer_attribute(const char *attribute, int size)
 void Tileset::load_image()
 {
     int rows = this->tile_count / this->columns;
-    if (!this->texture.loadFromFile(this->image_file_path))
+
+    char path_buf[512];
+    strcpy(path_buf, "Assets/");
+    strcat(path_buf, this->image_file_path);
+
+    if (!this->texture.loadFromFile(path_buf))
     {
-        std::cout << "Error loading texture from " << this->image_file_path << std::endl;
-    }/*
+        std::cout << "Error loading texture from " << path_buf << std::endl;
+    }
+    
+    
     for (int i = 0; i < columns; i++)
     {
         for (int j = 0; j < rows; j++)
         {
-            sf::Sprite sprite;
-            sprite.setTexture(this->texture);
-            sprite.setTextureRect(sf::IntRect(i * this->tile_width, j * this->tile_height, tile_width, tile_height));
+            sf::Sprite * sprite = new sf::Sprite();
+            sprite->setTexture(this->texture);
+            sprite->setTextureRect(sf::IntRect(i * this->tile_width, j * this->tile_height, tile_width, tile_height));
             sprites.push_back(sprite);
         }
-    }*/
+    }
 }

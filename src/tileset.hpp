@@ -16,7 +16,7 @@ private:
     unsigned int tile_height;
     unsigned int tile_count;
     unsigned int columns;
-    char* file_path;
+    char file_path[512];    // TODO: Not very efficient
     char* image_file_path;
     unsigned int image_width;
     unsigned int image_height;
@@ -25,7 +25,6 @@ private:
     rapidxml::xml_node<> *root_node = NULL;
 
     void load_xml_document();
-    void init();
     int get_integer_attribute(const char *, int);
 
     sf::Texture texture;
@@ -37,4 +36,9 @@ private:
 
 public:
     Tileset(char*, int);
+    Tileset();
+    ~Tileset();
+
+    void init();
+    sf::Sprite* get_sprite(int n);
 };

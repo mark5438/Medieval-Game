@@ -6,6 +6,7 @@
 #include "rapidxml-1.13/rapidxml.hpp"
 
 #include "tileset.hpp"
+#include "layer.hpp"
 
 class Map
 {
@@ -22,8 +23,10 @@ private:
     void load_xml_document();
     int get_integer_attribute(const char *, int);
     void initialize_tilesets();
+    void initialize_layers();
 
     std::list<Tileset*> tilesets;
+    std::list<Layer*> layers;
 
 public:
     /*
@@ -31,6 +34,7 @@ public:
      *   tile_width and tile_height
      */
     Map(const char *);
+    sf::Sprite* get_sprite(int);
     static Map load_map(const char *file_path);
 
     unsigned int get_width() { return this->width; }

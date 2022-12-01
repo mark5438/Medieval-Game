@@ -12,8 +12,9 @@ private:
     unsigned int width;
     unsigned int height;
 
-    std::list<Chunk> chunks;
+    std::list<Chunk*> chunks;
 
 public:
     Layer(rapidxml::xml_node<>*);
+    int get_texture_at(int x, int y);
 };

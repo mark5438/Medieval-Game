@@ -7,8 +7,8 @@
 class Chunk
 {
 private:
-    unsigned int x;
-    unsigned int y;
+    int x;
+    int y;
     unsigned int width;
     unsigned int height;
 

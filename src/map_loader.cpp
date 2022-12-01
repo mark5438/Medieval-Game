@@ -66,7 +66,6 @@ sf::Sprite *Map::get_sprite(int n)
     if (n != 0)
         for (std::list<Tileset *>::iterator it = this->tilesets.begin(); it != this->tilesets.end(); ++it)
         {
-            std::cout << n << std::endl;
             sf::Sprite *sprite = it.operator*()->get_sprite(n);
             if (sprite)
                 return sprite;

@@ -11,8 +11,8 @@ Chunk::Chunk(rapidxml::xml_node<> *node)
 
     char value_buffer[8]; // Biggest integer 10⁸
     int curser = 0;
-
-    for (int i = 0, k = 0; i < node->value_size(); i++)
+    int k = 0;
+    for (int i = 0; i < node->value_size(); i++)
     {
         if (s[0] == ',')
         {
@@ -28,6 +28,9 @@ Chunk::Chunk(rapidxml::xml_node<> *node)
 
         s++;
     }
+
+    // Add last read value
+    this->values[k++] = atoi(value_buffer);
 }
 
 int Chunk::get_texture_at(int x, int y)

@@ -59,7 +59,7 @@ void Tileset::load_image()
         {
             sf::Sprite *sprite = new sf::Sprite();
             sprite->setTexture(this->texture);
-            sprite->setTextureRect(sf::IntRect(i * this->tile_width, j * this->tile_height, tile_width, tile_height));
+            sprite->setTextureRect(sf::IntRect(j * this->tile_width, i * this->tile_height, tile_width, tile_height));
             sprites.push_back(sprite);
         }
     }

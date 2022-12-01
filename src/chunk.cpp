@@ -14,7 +14,7 @@ Chunk::Chunk(rapidxml::xml_node<> *node)
     int k = 0;
     for (int i = 0; i < node->value_size(); i++)
     {
-        if (s[0] == ',')
+        if ((s[0] == ',') || (i == node->value_size() - 1))
         {
             this->values[k++] = atoi(value_buffer);
             for (int j = 0; j < 8; j++)
@@ -28,9 +28,6 @@ Chunk::Chunk(rapidxml::xml_node<> *node)
 
         s++;
     }
-
-    // Add last read value
-    this->values[k++] = atoi(value_buffer);
 }
 
 int Chunk::get_texture_at(int x, int y)

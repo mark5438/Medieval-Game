@@ -67,7 +67,7 @@ void Tileset::load_image()
 
 sf::Sprite *Tileset::get_sprite(int n)
 {
-    if (this->firstgid <= n < this->firstgid + this->sprites.size())
+    if (this->firstgid <= n && n < this->firstgid + this->sprites.size())
     {
         std::list<sf::Sprite *>::iterator l_front = this->sprites.begin();
         std::advance(l_front, n - this->firstgid);

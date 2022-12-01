@@ -63,11 +63,18 @@ Map Map::load_map(const char *file_path)
 
 sf::Sprite *Map::get_sprite(int n)
 {
-    for (std::list<Tileset *>::iterator it = this->tilesets.begin(); it != this->tilesets.end(); ++it)
-    {
-        sf::Sprite *sprite = it.operator*()->get_sprite(n);
-        if (sprite)
-            return sprite;
-    }
+    if (n != 0)
+        for (std::list<Tileset *>::iterator it = this->tilesets.begin(); it != this->tilesets.end(); ++it)
+        {
+            std::cout << n << std::endl;
+            sf::Sprite *sprite = it.operator*()->get_sprite(n);
+            if (sprite)
+                return sprite;
+        }
     return NULL;
+}
+
+sf::Sprite *Map::get_sprite_at(int x, int y)
+{
+    return this->get_sprite(this->layers.begin().operator*()->get_texture_at(x, y));
 }

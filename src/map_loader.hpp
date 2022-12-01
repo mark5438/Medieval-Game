@@ -26,6 +26,8 @@ private:
     void initialize_layers();
 
     std::list<Tileset*> tilesets;
+
+    // TODO: Make sure all layers are sorted according to their ID
     std::list<Layer*> layers;
 
 public:
@@ -35,6 +37,7 @@ public:
      */
     Map(const char *);
     sf::Sprite* get_sprite(int);
+    sf::Sprite* get_sprite_at(int, int);
     static Map load_map(const char *file_path);
 
     unsigned int get_width() { return this->width; }

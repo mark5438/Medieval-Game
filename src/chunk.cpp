@@ -12,9 +12,13 @@ Chunk::Chunk(rapidxml::xml_node<> *node)
     char value_buffer[8]; // Biggest integer 10⁸
     int curser = 0;
     int k = 0;
+
+    // std::cout << this->x << " : " << this->y << std::endl;
+    // std::cout << node->value_size() << std::endl << std::endl;
+
     for (int i = 0; i < node->value_size(); i++)
     {
-        if ((s[0] == ',') || (i == node->value_size() - 1))
+        if ((s[i] == ',') || (i == node->value_size() - 1))
         {
             this->values[k++] = atoi(value_buffer);
             for (int j = 0; j < 8; j++)
@@ -23,16 +27,15 @@ Chunk::Chunk(rapidxml::xml_node<> *node)
         }
         else
         {
-            value_buffer[curser++] = s[0];
+            if (s[i] != 0x2C)
+                value_buffer[curser++] = s[i];
         }
-
-        s++;
     }
 }
 
 int Chunk::get_texture_at(int x, int y)
 {
-    if (this->x <= x < this->x + this->width && this->y <= y < this->y + this->height)
+    if (this->x <= x && x < this->x + this->width && this->y <= y && y < this->y + this->height)
     {
         int index = (y - this->y) * this->width + (x - this->x);
         return values[index];

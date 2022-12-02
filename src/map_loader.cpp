@@ -73,7 +73,31 @@ sf::Sprite *Map::get_sprite(int n)
     return NULL;
 }
 
-sf::Sprite *Map::get_sprite_at(int x, int y)
+sf::Sprite *Map::get_sprite_at(Layer * l, int x, int y)
 {
-    return this->get_sprite(this->layers.begin().operator*()->get_texture_at(x, y));
+    return this->get_sprite(l->get_texture_at(x, y));
+}
+
+void Map::draw_layer (Layer * l)
+{
+    for (int i = 0; i < this->get_height(); i++)
+    {
+        for (int j = 0; j < this->get_width(); j++)
+        {
+            sf::Sprite *sprite = this->get_sprite_at(l, j, i);
+            if (sprite)
+            {
+                sprite->setPosition(j * 16, i * 16);
+                this->window->draw(*sprite);
+            }
+        }
+    }
+}
+
+void Map::draw_map()
+{
+    for (std::list<Layer*>::iterator it = this->layers.begin(); it != this->layers.end(); ++it)
+    {
+        this->draw_layer(it.operator*());
+    }    
 }

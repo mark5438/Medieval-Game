@@ -53,9 +53,9 @@ void Tileset::load_image()
         std::cout << "Error loading texture from " << path_buf << std::endl;
     }
 
-    for (int i = 0; i < columns; i++)
+    for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < rows; j++)
+        for (int j = 0; j < columns; j++)
         {
             sf::Sprite *sprite = new sf::Sprite();
             sprite->setTexture(this->texture);
@@ -70,7 +70,7 @@ sf::Sprite *Tileset::get_sprite(int n)
     if (this->firstgid <= n && n < this->firstgid + this->sprites.size())
     {
         std::list<sf::Sprite *>::iterator l_front = this->sprites.begin();
-        std::advance(l_front, n - this->firstgid);
+        std::advance(l_front, (n - this->firstgid));
         return l_front.operator*();
     }
     else

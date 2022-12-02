@@ -3,21 +3,21 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "starting_map",
+    "activeFile": "starting_map.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "Decorations.tsx": {
-            "scaleInDock": 0.531,
+            "scaleInDock": 1.1406,
             "scaleInEditor": 0.7293
         },
         "Fence.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 1.12,
             "scaleInEditor": 7.2658
         },
         "Terrain.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 1.12,
             "scaleInEditor": 1
         },
         "starting_map": {
@@ -29,11 +29,11 @@
             }
         },
         "starting_map.tmx": {
-            "scale": 0.7854,
-            "selectedLayer": 2,
+            "scale": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 356.5062388591801,
-                "y": 605.423987776929
+                "x": 591,
+                "y": 398.5
             }
         }
     },
@@ -43,14 +43,13 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "Terrain.tsx",
-        "starting_map"
+        "starting_map.tmx"
     ],
     "project": "Medieval Game.tiled-project",
     "recentFiles": [
         "starting_map.tmx",
-        "Decorations.tsx",
         "Fence.tsx",
+        "Decorations.tsx",
         "Terrain.tsx",
         "starting_map"
     ],

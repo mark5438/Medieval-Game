@@ -27,7 +27,7 @@ Chunk::Chunk(rapidxml::xml_node<> *node)
         }
         else
         {
-            if (s[i] != 0x2C)
+            if (s[i] != 0x2C)   // ignore new line characters
                 value_buffer[curser++] = s[i];
         }
     }

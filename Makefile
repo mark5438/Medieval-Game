@@ -7,14 +7,7 @@ TARGET := DEBUG
 CC := g++
 CFLAGS := -Wall -g
 
-default:
+default: 
 	g++ -c $(SRCS) -I SFML-2.5.1/include
 	g++ $(OBJS) -o build/sfml-app -L SFML-2.5.1//lib -lsfml-graphics -lsfml-window -lsfml-system
-	$(RM) *.o
 	./build/sfml-app
-
-all: $(TARGET)
-$(TARGET): $(OBJS)
-	$(CC) -o $@ $^ -I SFML-2.5.1/include
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -L SFML-2.5.1//lib -lsfml-graphics -lsfml-window -lsfml-system

@@ -8,6 +8,8 @@ int main()
 
     Map map = Map::load_map("Tiled/starting_map.tmx");
 
+    map.set_window(&window);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -18,9 +20,7 @@ int main()
         }
 
         window.clear();
-
-
-
+        map.draw_map();
         window.display();
     }
 

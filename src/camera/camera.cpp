@@ -33,6 +33,7 @@ int move_camera_y(int delta)
 float change_camera_zoom(float delta)
 {
     zoom += delta;
+    return zoom;
 }
 
 void set_camera_x(int x_)

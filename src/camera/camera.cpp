@@ -14,19 +14,19 @@ void check_keyboard()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        move_camera_y(-speed_factor);
+        move_camera_y(-speed_factor * zoom);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        move_camera_y(speed_factor);
+        move_camera_y(speed_factor * zoom);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        move_camera_x(-speed_factor);
+        move_camera_x(-speed_factor * zoom);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        move_camera_x(speed_factor);
+        move_camera_x(speed_factor * zoom);
     }
 }
 

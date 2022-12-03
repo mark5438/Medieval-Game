@@ -7,7 +7,9 @@ int speed_factor = 4;
 
 void check_mouse()
 {
-    zoom += (float) get_mouse_wheel_delta() / 100;
+    float deltaZoom = ((float)get_mouse_wheel_delta() / 25) * zoom;
+    zoom += deltaZoom;
+    //TODO: Move camera so that you zoom in on the mouse, instead of top left corner
 }
 
 void check_keyboard()

@@ -1,7 +1,7 @@
 #include "camera.hpp"
 
-int x, y;
-float zoom;
+int x = 0, y = 0;
+float zoom = 1;
 
 int get_camera_x()
 {

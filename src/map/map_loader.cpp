@@ -79,7 +79,7 @@ sf::Sprite *Map::get_sprite_at(Layer * l, int x, int y)
     return this->get_sprite(l->get_texture_at(x, y));
 }
 
-void Map::draw_layer (Layer * l)
+void Map::draw_layer(Layer * l)
 {
     for (int i = 0; i < this->get_height(); i++)
     {
@@ -88,7 +88,8 @@ void Map::draw_layer (Layer * l)
             sf::Sprite *sprite = this->get_sprite_at(l, j, i);
             if (sprite)
             {
-                sprite->setPosition(j * 16 - get_camera_x(), i * 16 - get_camera_y());
+                sprite->setScale(get_camera_zoom(), get_camera_zoom());
+                sprite->setPosition(j * 16 * get_camera_zoom() - get_camera_x(), i * 16 * get_camera_zoom() - get_camera_y());
                 this->window->draw(*sprite);
             }
         }

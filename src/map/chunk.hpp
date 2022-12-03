@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "rapidxml-1.13/rapidxml.hpp"
+#include <rapidxml.hpp>
 
 class Chunk
 {

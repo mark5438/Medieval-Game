@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "src/map_loader.hpp"
+#include "src/map/map_loader.hpp"
 
 int main()
 {

@@ -8,6 +8,6 @@ CC := g++
 CFLAGS := -Wall -g
 
 default: 
-	g++ -c $(SRCS) -I SFML-2.5.1/include
+	g++ -c $(SRCS) -I SFML-2.5.1/include -I src/rapidxml-1.13
 	g++ $(OBJS) -o build/sfml-app -L SFML-2.5.1//lib -lsfml-graphics -lsfml-window -lsfml-system
 	./build/sfml-app

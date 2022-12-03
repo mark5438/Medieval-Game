@@ -1,3 +1,7 @@
+#include <SFML/Graphics.hpp>
+
+void camera_check_keyboard();
+
 int get_camera_x();
 int get_camera_y();
 float get_camera_zoom();

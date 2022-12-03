@@ -3,6 +3,28 @@
 int x = 0, y = 0;
 float zoom = 1;
 
+int speed_factor = 4;
+
+void camera_check_keyboard()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    {
+        move_camera_y(-speed_factor);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    {
+        move_camera_y(speed_factor);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        move_camera_x(-speed_factor);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        move_camera_x(speed_factor);
+    }
+}
+
 int get_camera_x()
 {
     return x;

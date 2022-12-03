@@ -5,7 +5,12 @@ float zoom = 1;
 
 int speed_factor = 4;
 
-void camera_check_keyboard()
+void check_mouse()
+{
+    zoom += (float) get_mouse_wheel_delta() / 100;
+}
+
+void check_keyboard()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
@@ -23,6 +28,12 @@ void camera_check_keyboard()
     {
         move_camera_x(speed_factor);
     }
+}
+
+void camera_check_hid_events()
+{
+    check_keyboard();
+    check_mouse();
 }
 
 int get_camera_x()

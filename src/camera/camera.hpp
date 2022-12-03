@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 
-void camera_check_keyboard();
+#include "mouse_wheel/mouse_wheel.hpp"
+
+void camera_check_hid_events();
 
 int get_camera_x();
 int get_camera_y();

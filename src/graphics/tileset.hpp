@@ -8,6 +8,20 @@
 #include <SFML/Graphics.hpp>
 
 #include <rapidxml.hpp>
+#include <list>
+
+#include "../clock/clock.hpp"
+
+typedef struct frame {
+    int tile_id;
+    int duration;   // ms
+} t_frame;
+
+typedef struct animation {
+    int tile_id;
+    int duration;
+    std::list<t_frame> frames;
+} t_animation;
 
 class Tileset
 {
@@ -29,8 +43,15 @@ private:
 
     sf::Texture texture;
     std::list<sf::Sprite*> sprites;
+    std::list<t_animation> animations;
 
     void load_image();
+    void read_tiles();
+    void load_animation(int, rapidxml::xml_node<>*);
+    sf::Sprite * get_animation_sprite_after(t_animation * animation, int ms);
+    sf::Sprite * get_sprite_at_index(int);
+
+    t_animation * get_animation_tile(int);
 
     unsigned int firstgid;
 

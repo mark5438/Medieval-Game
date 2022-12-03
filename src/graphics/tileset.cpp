@@ -130,10 +130,10 @@ sf::Sprite *Tileset::get_animation_sprite_after(t_animation *animation, int ms)
         counted_time += it.operator*().duration;
         if (counted_time >= animation_time)
         {
-            std::cout << it.operator*().tile_id << std::endl;
             return this->get_sprite_at_index(it.operator*().tile_id);
         }
     }
+    return NULL;
 }
 
 sf::Sprite *Tileset::get_sprite(int n)

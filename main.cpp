@@ -2,6 +2,7 @@
 
 #include "src/map/map_loader.hpp"
 #include "src/camera/camera.hpp"
+#include "src/camera/mouse_wheel/mouse_wheel.hpp"
 
 int main()
 {
@@ -18,9 +19,11 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            else if(event.type == sf::Event::MouseWheelMoved)
+                mouse_wheel_changed(&event);
         }
 
-        camera_check_keyboard();
+        camera_check_hid_events();
 
         window.clear();
         map.draw_map();

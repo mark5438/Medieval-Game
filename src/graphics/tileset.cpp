@@ -20,6 +20,7 @@ void Tileset::init()
     this->image_height = atoi(image_node->first_attribute("height", 6)->value());
 
     this->load_image();
+    this->read_tiles();
 }
 
 void Tileset::load_xml_document()
@@ -65,13 +66,85 @@ void Tileset::load_image()
     }
 }
 
+void Tileset::read_tiles()
+{
+    /*
+     *   For whatever reason 2 xml files can not be open at once.
+     *   Therefore i must read the xml files once more
+     */
+    this->load_xml_document();
+    rapidxml::xml_node<> *node = this->root_node->first_node("tile");
+    for (rapidxml::xml_node<> *node = this->root_node->first_node("tile"); node; node = node->next_sibling("tile"))
+    {
+        int id = atoi(node->first_attribute("id")->value());
+
+        // Check for animations
+        // There can only be one animation per tile, so no loop is needed
+        rapidxml::xml_node<> *animation_node = node->first_node("animation");
+        if (animation_node)
+        {
+            load_animation(id, animation_node);
+        }
+    }
+}
+
+void Tileset::load_animation(int tileid, rapidxml::xml_node<> *node)
+{
+    t_animation animation;
+    animation.tile_id = tileid;
+    animation.duration = 0;
+    for (rapidxml::xml_node<> *frame_node = node->first_node("frame"); frame_node; frame_node = frame_node->next_sibling("frame"))
+    {
+        t_frame frame;
+        frame.tile_id = atoi(frame_node->first_attribute("tileid")->value());
+        frame.duration = atoi(frame_node->first_attribute("duration")->value());
+        animation.duration += frame.duration;
+        animation.frames.push_back(frame);
+    }
+    this->animations.push_back(animation);
+}
+
+t_animation *Tileset::get_animation_tile(int tileid)
+{
+    for (std::list<t_animation>::iterator it = this->animations.begin(); it != this->animations.end(); ++it)
+    {
+        if (it.operator*().tile_id == tileid)
+            return &it.operator*();
+    }
+    return NULL;
+}
+
+sf::Sprite *Tileset::get_sprite_at_index(int index)
+{
+    std::list<sf::Sprite *>::iterator l_front = this->sprites.begin();
+    std::advance(l_front, index);
+    return l_front.operator*();
+}
+
+sf::Sprite *Tileset::get_animation_sprite_after(t_animation *animation, int ms)
+{
+    int animation_time = ms % animation->duration;
+    int counted_time = 0;
+    for (std::list<t_frame>::iterator it = animation->frames.begin(); it != animation->frames.end(); ++it)
+    {
+        counted_time += it.operator*().duration;
+        if (counted_time >= animation_time)
+        {
+            std::cout << it.operator*().tile_id << std::endl;
+            return this->get_sprite_at_index(it.operator*().tile_id);
+        }
+    }
+}
+
 sf::Sprite *Tileset::get_sprite(int n)
 {
     if (this->firstgid <= n && n < this->firstgid + this->sprites.size())
     {
-        std::list<sf::Sprite *>::iterator l_front = this->sprites.begin();
-        std::advance(l_front, (n - this->firstgid));
-        return l_front.operator*();
+        t_animation *animation_tile = get_animation_tile(n - this->firstgid);
+        if (animation_tile)
+            return this->get_animation_sprite_after(animation_tile, get_elapsed_time());
+        else
+            return this->get_sprite_at_index(n - this->firstgid);
     }
     else
     {

@@ -1,13 +1,13 @@
 #include "clock.hpp"
 
-sf::Clock clock;
+sf::Clock clock_;
 
 void init_clock()
 {
-    clock.restart();
+    clock_.restart();
 }
 
 int get_elapsed_time()
 {
-    return clock.getElapsedTime().asMilliseconds();
+    return clock_.getElapsedTime().asMilliseconds();
 }

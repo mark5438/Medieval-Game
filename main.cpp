@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "src/map/map_loader.hpp"
+#include "src/camera/camera.hpp"
 
 int main()
 {
@@ -18,6 +19,8 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        camera_check_keyboard();
 
         window.clear();
         map.draw_map();

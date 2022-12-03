@@ -3,9 +3,9 @@
 #include <vector>
 #include <list>
 
-#include "rapidxml-1.13/rapidxml.hpp"
+#include <rapidxml.hpp>
 
-#include "tileset.hpp"
+#include "../graphics/tileset.hpp"
 #include "layer.hpp"
 
 class Map

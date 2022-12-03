@@ -1,4 +1,5 @@
 #include "map_loader.hpp"
+#include "../camera/camera.hpp"
 
 Map::Map(const char *file_path)
 {
@@ -87,7 +88,7 @@ void Map::draw_layer (Layer * l)
             sf::Sprite *sprite = this->get_sprite_at(l, j, i);
             if (sprite)
             {
-                sprite->setPosition(j * 16, i * 16);
+                sprite->setPosition(j * 16 - get_camera_x(), i * 16 - get_camera_y());
                 this->window->draw(*sprite);
             }
         }

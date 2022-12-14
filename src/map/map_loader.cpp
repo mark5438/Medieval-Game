@@ -38,8 +38,23 @@ void Map::initialize_layers()
     rapidxml::xml_node<> *layer = this->root_node->first_node("layer");
     while (layer)
     {
-        this->layers.push_back(new Layer(layer));
+        if (!strcmp(layer->first_attribute("name")->value(), "NPCS"))
+            initialize_npc_layer(layer);
+        else
+        {
+            this->layers.push_back(new Layer(layer));
+        }
         layer = layer->next_sibling("layer");
+    }
+}
+
+void Map::initialize_npc_layer(rapidxml::xml_node<> *npc_layer)
+{
+    for (rapidxml::xml_node<> *chunk = npc_layer->first_node("data")->first_node("chunk"); chunk; chunk = chunk->next_sibling("chunk"))
+    {
+        int start_x = atoi(chunk->first_attribute("x")->value());
+        int start_y = atoi(chunk->first_attribute("y")->value());
+        Chunk::add_npcs_to_list(&this->npcs, chunk, start_x, start_y);
     }
 }
 
@@ -74,12 +89,19 @@ sf::Sprite *Map::get_sprite(int n)
     return NULL;
 }
 
-sf::Sprite *Map::get_sprite_at(Layer * l, int x, int y)
+sf::Sprite *Map::get_sprite_at(Layer *l, int x, int y)
 {
     return this->get_sprite(l->get_texture_at(x, y));
 }
 
-void Map::draw_layer(Layer * l)
+void Map::draw_sprite_at(sf::Sprite *sprite, int x, int y)
+{
+    sprite->setScale(get_camera_zoom(), get_camera_zoom());
+    sprite->setPosition(x* get_camera_zoom() - get_camera_x(), y * get_camera_zoom() - get_camera_y());
+    this->window->draw(*sprite);
+}
+
+void Map::draw_layer(Layer *l)
 {
     for (int i = 0; i < this->get_height(); i++)
     {
@@ -88,18 +110,32 @@ void Map::draw_layer(Layer * l)
             sf::Sprite *sprite = this->get_sprite_at(l, j, i);
             if (sprite)
             {
-                sprite->setScale(get_camera_zoom(), get_camera_zoom());
-                sprite->setPosition(j * 16 * get_camera_zoom() - get_camera_x(), i * 16 * get_camera_zoom() - get_camera_y());
-                this->window->draw(*sprite);
+                this->draw_sprite_at(sprite, j * 16, i * 16);
             }
         }
     }
 }
 
+void Map::draw_environment()
+{
+    for (std::list<Layer *>::iterator it = this->layers.begin(); it != this->layers.end(); ++it)
+        this->draw_layer(it.operator*());
+}
+
+void Map::draw_npc(NPC *npc)
+{
+    sf::Sprite *sprite = this->get_sprite(npc->get_sprite_id());
+    this->draw_sprite_at(sprite, npc->get_x() * 16, npc->get_y() * 16);
+}
+
+void Map::draw_npcs()
+{
+    for (std::list<NPC *>::iterator it = this->npcs.begin(); it != this->npcs.end(); ++it)
+        this->draw_npc(it.operator*());
+}
+
 void Map::draw_map()
 {
-    for (std::list<Layer*>::iterator it = this->layers.begin(); it != this->layers.end(); ++it)
-    {
-        this->draw_layer(it.operator*());
-    }    
+    draw_environment();
+    draw_npcs();
 }

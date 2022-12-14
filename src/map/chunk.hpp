@@ -4,6 +4,8 @@
 
 #include <rapidxml.hpp>
 
+#include "../npcs/npc.hpp"
+
 class Chunk
 {
 private:
@@ -17,4 +19,6 @@ private:
 public:
     Chunk(rapidxml::xml_node<>*);
     int get_texture_at(int x, int y);
+
+    static void add_npcs_to_list(std::list<NPC *>*, rapidxml::xml_node<>*, int, int);
 };

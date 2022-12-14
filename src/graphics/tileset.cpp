@@ -1,11 +1,22 @@
 #include "tileset.hpp"
 
+/**
+ * Construct a tileset
+ *
+ * @param filepath Path to the tileset xml file
+ * @param firstgid The first tile id, that corresponds to the sprite this->sprites[0]
+ */
 Tileset::Tileset(char *file_path, int firstgid)
 {
     strcpy(this->file_path, file_path);
     this->firstgid = firstgid;
 }
 
+/**
+ * The tileset is initialized after, because only one xml file
+ * can be loaded at once using rapidxml, so if I load the new file
+ * in the constructor, the rest of the tilesets will be ignored.
+ */
 void Tileset::init()
 {
     this->load_xml_document();
@@ -23,6 +34,10 @@ void Tileset::init()
     this->read_tiles();
 }
 
+/**
+ * Loads the xml document with the give file_path[] and saves the xml data to the variable
+ * doc and the variable root_node
+ */
 void Tileset::load_xml_document()
 {
     char path_buf[256];
@@ -36,11 +51,22 @@ void Tileset::load_xml_document()
     this->root_node = doc.first_node("tileset");
 }
 
+/**
+ * Get an attribute from the rootnode as integer
+ *
+ * @param name The attribute name
+ * @param length The attribute names length
+ *
+ * @return The integer value of the rootnodes first attribute with the given name
+ */
 int Tileset::get_integer_attribute(const char *attribute, int size)
 {
     return atoi(this->root_node->first_attribute(attribute, size)->value());
 }
 
+/**
+ * Loads the image
+ */
 void Tileset::load_image()
 {
     int rows = this->tile_count / this->columns;
@@ -66,6 +92,9 @@ void Tileset::load_image()
     }
 }
 
+/**
+ * Loop through all tiles to check if any tiles should be animated
+ */
 void Tileset::read_tiles()
 {
     /*
@@ -88,6 +117,9 @@ void Tileset::read_tiles()
     }
 }
 
+/**
+ * Load an animation and save it to the animations list
+ */
 void Tileset::load_animation(int tileid, rapidxml::xml_node<> *node)
 {
     t_animation animation;
@@ -104,6 +136,13 @@ void Tileset::load_animation(int tileid, rapidxml::xml_node<> *node)
     this->animations.push_back(animation);
 }
 
+/**
+ *  With a given tileid, the animation is returnd
+ *
+ * @param tileid The tileid that the animation is bound to
+ *
+ * @return The anitaion object
+ */
 t_animation *Tileset::get_animation_tile(int tileid)
 {
     for (std::list<t_animation>::iterator it = this->animations.begin(); it != this->animations.end(); ++it)
@@ -114,6 +153,14 @@ t_animation *Tileset::get_animation_tile(int tileid)
     return NULL;
 }
 
+/**
+ * Get a sprite from the sprite list at a given index,
+ * the first sprite being at index 0.
+ *
+ * @param index The index of the sprite
+ *
+ * @return A pointer to the sprite at the given index
+ */
 sf::Sprite *Tileset::get_sprite_at_index(int index)
 {
     std::list<sf::Sprite *>::iterator l_front = this->sprites.begin();
@@ -121,9 +168,16 @@ sf::Sprite *Tileset::get_sprite_at_index(int index)
     return l_front.operator*();
 }
 
-sf::Sprite *Tileset::get_animation_sprite_after(t_animation *animation, int ms)
+/**
+ * Get the sprite that should be displayed one the next frame.
+ *
+ * @param animation A pointer to an instance of the animation struct
+ *
+ * @return A pointer to the sprite that should be drawn
+ */
+sf::Sprite *Tileset::get_animation_sprite_now(t_animation *animation)
 {
-    int animation_time = ms % animation->duration;
+    int animation_time = get_elapsed_time() % animation->duration;
     int counted_time = 0;
     for (std::list<t_frame>::iterator it = animation->frames.begin(); it != animation->frames.end(); ++it)
     {
@@ -136,13 +190,20 @@ sf::Sprite *Tileset::get_animation_sprite_after(t_animation *animation, int ms)
     return NULL;
 }
 
+/**
+ * Get a sprite with a given id n
+ *
+ * @param n The sprite id
+ *
+ * @return A pointer to the sprite if the id is within this tileset. NULL otherwise
+ */
 sf::Sprite *Tileset::get_sprite(int n)
 {
     if (this->firstgid <= n && n < this->firstgid + this->sprites.size())
     {
         t_animation *animation_tile = get_animation_tile(n - this->firstgid);
         if (animation_tile)
-            return this->get_animation_sprite_after(animation_tile, get_elapsed_time());
+            return this->get_animation_sprite_now(animation_tile);
         else
             return this->get_sprite_at_index(n - this->firstgid);
     }

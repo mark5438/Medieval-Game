@@ -7,6 +7,7 @@
 
 #include "../graphics/tileset.hpp"
 #include "layer.hpp"
+#include "../npcs/npc.hpp"
 
 class Map
 {
@@ -24,13 +25,20 @@ private:
     int get_integer_attribute(const char *, int);
     void initialize_tilesets();
     void initialize_layers();
+    void initialize_npc_layer(rapidxml::xml_node<> *);
     sf::Sprite *get_sprite_at(Layer*, int, int);
+    void draw_environment();
     void draw_layer(Layer*);
+    void draw_npcs();
+    void draw_npc(NPC*);
+    void draw_sprite_at(sf::Sprite*, int, int);
 
     std::list<Tileset *> tilesets;
 
     // TODO: Make sure all layers are sorted according to their ID
     std::list<Layer *> layers;
+    std::list<NPC *> npcs;
+    std::list<char *> npcs_sources;
 
     sf::RenderWindow * window;
 

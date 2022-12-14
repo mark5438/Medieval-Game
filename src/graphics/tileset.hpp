@@ -34,6 +34,7 @@ private:
     char* image_file_path;
     unsigned int image_width;
     unsigned int image_height;
+    char* tileset_name;
 
     rapidxml::xml_document<> doc;
     rapidxml::xml_node<> *root_node = NULL;

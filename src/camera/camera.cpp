@@ -3,12 +3,12 @@
 int x = 0, y = 0;
 float zoom = 1;
 
-int speed_factor = 4;
+#define SPEED_FACTOR 4
+#define ZOOM_FACTOR 0.04f
 
 void check_mouse()
 {
-    float deltaZoom = ((float)get_mouse_wheel_delta() / 25) * zoom;
-    zoom += deltaZoom;
+    change_camera_zoom(get_mouse_wheel_delta());
     //TODO: Move camera so that you zoom in on the mouse, instead of top left corner
 }
 
@@ -16,19 +16,19 @@ void check_keyboard()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        move_camera_y(-speed_factor * zoom);
+        move_camera_y(-SPEED_FACTOR * zoom);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        move_camera_y(speed_factor * zoom);
+        move_camera_y(SPEED_FACTOR * zoom);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        move_camera_x(-speed_factor * zoom);
+        move_camera_x(-SPEED_FACTOR * zoom);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        move_camera_x(speed_factor * zoom);
+        move_camera_x(SPEED_FACTOR * zoom);
     }
 }
 
@@ -67,7 +67,7 @@ int move_camera_y(int delta)
 
 float change_camera_zoom(float delta)
 {
-    zoom += delta;
+    zoom += delta * ZOOM_FACTOR * zoom;
     return zoom;
 }
 

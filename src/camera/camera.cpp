@@ -81,7 +81,18 @@ void set_camera_y(int y_)
     y = y_;
 }
 
+void set_camera_position(int x, int y)
+{
+    set_camera_x(x);
+    set_camera_y(y);
+}
+
 void set_camera_zoom(float zoom_)
 {
     zoom = zoom_;
+}
+
+void reset_camera_zoom()
+{
+    set_camera_zoom(1);
 }

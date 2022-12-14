@@ -55,9 +55,51 @@ int move_camera_y(int);
 
 /**
  * Change the camera zoom factor, by a floating point.
+ * 
+ * Note that the change is non-linear. How much the delta
+ * affects the zoom depends on the zoom factor before this function call.
+ * 
+ * @param delta How much the zoom should be changed. The mousewheel delta
+ *              can be passed directly.
+ * 
+ * @return The new zoom factor
 */
 float change_camera_zoom(float);
 
+/**
+ * Set the camera's x position. Useful if a new scene is loaded,
+ * and the camera is set to start at a specific position.
+ * 
+ * @param newX The new camera x position
+*/
 void set_camera_x(int);
+
+/**
+ * Set the camera's y position. Useful if a new scene is loaded,
+ * and the camera is set to start at a specific position.
+ * 
+ * @param newY the new camera y position
+*/
 void set_camera_y(int);
+
+/**
+ * Set the camera's x and y position. Useful if a new scene is loaded,
+ * and the camera is set to start at a specific position.
+ * 
+ * @param newX The new camera x position
+ * @param newY The new camera y position
+*/
+void set_camera_position(int, int);
+
+/**
+ * Set the camera zoom to a specific value
+ * 
+ * @param zoom New zoom factor
+*/
 void set_camera_zoom(float);
+
+/**
+ * Set camera zoom to default value.
+ * Same as set_camera_zoom(1)
+*/
+void reset_camera_zoom();

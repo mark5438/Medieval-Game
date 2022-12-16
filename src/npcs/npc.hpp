@@ -14,10 +14,10 @@
 class NPC_Animation
 {
 public:
-    virtual int get_walking_west_sprite_id() = 0;
-    virtual int get_walking_north_sprite_id() = 0;
-    virtual int get_walking_east_sprite_id() = 0;
-    virtual int get_walking_south_sprite_id() = 0;
+    virtual int get_walking_west_sprite_id() { return 0; }
+    virtual int get_walking_north_sprite_id() { return 0; }
+    virtual int get_walking_east_sprite_id() { return 0; }
+    virtual int get_walking_south_sprite_id() { return 0; }
 };
 
 class NPC_Animation_Generic_Animal : NPC_Animation

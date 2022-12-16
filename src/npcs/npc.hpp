@@ -1,6 +1,10 @@
 #include <SFML/System/Vector2.hpp>
 
 #define CHICKEN_NPC_NUMBER 6401
+#define CHICKEN_NPC_WALK_WEST_TILE_ID 6401
+#define CHICKEN_NPC_WALK_NORTH_TILE_ID 6405
+#define CHICKEN_NPC_WALK_EAST_TILE_ID 6409
+#define CHICKEN_NPC_WALK_SOUTH_TILE_ID 64013
 
 #ifndef NPC_TYPE
 #define NPC_TYPE
@@ -23,7 +27,7 @@ public:
 /**
  * Implementation of NPC_Animation, for animals that can only walk.
 */
-class NPC_Animation_Generic_Animal : NPC_Animation
+class NPC_Animation_Generic_Animal : public NPC_Animation
 {
 private:
     int walk_west_tile;
@@ -45,7 +49,7 @@ private:
     sf::Vector2<int> position;
     sf::Vector2<int> tile_offset;
 
-    NPC_Animation animation;
+    NPC_Animation * animation;
 
 public:
     NPC(int, int, int);

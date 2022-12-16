@@ -1,5 +1,7 @@
 #include <list>
 
+#include <rapidxml.hpp>
+
 #include "../clock/clock.hpp"
 
 /**
@@ -9,17 +11,24 @@
  * and a duration dictating how many miliseconds thisframe will be visible,
  * before moving on to next frame.
  */
-typedef struct frame
+class Frame
 {
+private:
     int tile_id;
     int duration;
-} t_frame;
+
+public:
+    Frame(int, int);
+    int get_tile_id() { return this->tile_id; };
+    int get_duration() { return this->duration; };
+};
 
 /**
  * A structure defining one animated tile
  */
-typedef struct animation
+class Animation
 {
+private:
     /**
      * The tile id tells what tile will trigger this animation.
      * If a tile is present in an animation layer of the map csv files,
@@ -32,20 +41,21 @@ typedef struct animation
      * Duration is the total duration of one animation cycle,
      * hence the sum of all frames duration
      */
-    int duration;
+    int duration = 0;
 
     /**
      * Ordered list of frames. Frames will be shown in the same order, as they are present in the list
      */
-    std::list<t_frame> frames;
-} t_animation;
+    std::list<Frame *> frames;
 
-/**
- * Get the id of the next sprite to show, for any given animation.
- * Function knows the clock.
- * 
- * @param animation, The animation you need a frame from
- * 
- * @return The id of next frame
-*/
-int get_animation_sprite_id_now(t_animation*);
+public:
+    Animation(int, rapidxml::xml_node<> *);
+    /**
+     * Get the id of the next sprite to show, for any given animation.
+     * Function knows the clock.
+     *
+     * @return The id of next frame
+     */
+    int get_animation_sprite_id_now();
+    int get_tile_id() { return this->tile_id; };
+};

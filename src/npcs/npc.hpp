@@ -1,10 +1,10 @@
 #include <SFML/System/Vector2.hpp>
 
 #define CHICKEN_NPC_NUMBER 6401
-#define CHICKEN_NPC_WALK_WEST_TILE_ID 6401
-#define CHICKEN_NPC_WALK_NORTH_TILE_ID 6405
-#define CHICKEN_NPC_WALK_EAST_TILE_ID 6409
-#define CHICKEN_NPC_WALK_SOUTH_TILE_ID 64013
+#define CHICKEN_NPC_WALK_WEST_TILE_ID 6404
+#define CHICKEN_NPC_WALK_NORTH_TILE_ID 6408
+#define CHICKEN_NPC_WALK_EAST_TILE_ID 64012
+#define CHICKEN_NPC_WALK_SOUTH_TILE_ID 64016
 
 #ifndef NPC_TYPE
 #define NPC_TYPE
@@ -53,7 +53,7 @@ private:
 
 public:
     NPC(int, int, int);
-    int get_sprite_id() { return CHICKEN_NPC_NUMBER; }
+    int get_sprite_id() { return animation->get_walking_north_sprite_id(); }
     int get_x() { return this->position.x; }
     int get_y() { return this->position.y; }
 };

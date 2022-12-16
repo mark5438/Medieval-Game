@@ -14,8 +14,7 @@ Layer::Layer(rapidxml::xml_node<> *xml_node)
 
     while (chunk)
     {
-        Chunk * c = new Chunk(chunk);
-        chunks.push_back(c);
+        chunks.push_back(new Chunk(chunk));
         chunk = chunk->next_sibling("chunk");
     }
 }

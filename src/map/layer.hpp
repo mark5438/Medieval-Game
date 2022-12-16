@@ -17,7 +17,6 @@ private:
 public:
     Layer(rapidxml::xml_node<> *);
     int get_texture_at(int x, int y);
-    void draw_layer();
 
     int get_id(){return this->id;}
 };

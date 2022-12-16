@@ -74,7 +74,7 @@ private:
     /**
      * A list of all animations
      */
-    std::list<t_animation> animations;
+    std::list<Animation*> animations;
 
     /**
      * Loads the image
@@ -98,7 +98,7 @@ private:
      *
      * @return A pointer to the sprite that should be drawn
      */
-    sf::Sprite *get_animation_sprite_now(t_animation *animation);
+    sf::Sprite *get_animation_sprite_now(Animation *animation);
 
     /**
      * Get a sprite from the sprite list at a given index,
@@ -117,7 +117,7 @@ private:
      *
      * @return The anitaion object
      */
-    t_animation *get_animation_tile(int tileid);
+    Animation *get_animation_tile(int tileid);
 
     /**
      * The index of the first sprite from this tileset in the virtual list containing

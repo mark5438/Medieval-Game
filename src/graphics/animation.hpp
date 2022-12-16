@@ -40,4 +40,12 @@ typedef struct animation
     std::list<t_frame> frames;
 } t_animation;
 
+/**
+ * Get the id of the next sprite to show, for any given animation.
+ * Function knows the clock.
+ * 
+ * @param animation, The animation you need a frame from
+ * 
+ * @return The id of next frame
+*/
 int get_animation_sprite_id_now(t_animation*);

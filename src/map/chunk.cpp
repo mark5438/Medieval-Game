@@ -45,7 +45,7 @@ void Chunk::add_npcs_to_list(std::list<NPC *> *list, rapidxml::xml_node<> *chunk
     {
         if (tiles[i] != 0)
         {
-            list->push_back(new NPC(start_x + (int)(i % 16), start_y + (int)(i / 16)));
+            list->push_back(new NPC(start_x + (int)(i % 16), start_y + (int)(i / 16), tiles[i]));
         }
     }
 }

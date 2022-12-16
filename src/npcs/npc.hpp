@@ -1,6 +1,6 @@
 #include <SFML/System/Vector2.hpp>
 
-#define CHICKEN_NPC_NUMBER 6405
+#define CHICKEN_NPC_NUMBER 6401
 
 #ifndef NPC_TYPE
 #define NPC_TYPE
@@ -20,6 +20,9 @@ public:
     virtual int get_walking_south_sprite_id() { return 0; }
 };
 
+/**
+ * Implementation of NPC_Animation, for animals that can only walk.
+*/
 class NPC_Animation_Generic_Animal : NPC_Animation
 {
 private:
@@ -45,7 +48,7 @@ private:
     NPC_Animation animation;
 
 public:
-    NPC(int, int);
+    NPC(int, int, int);
     int get_sprite_id() { return CHICKEN_NPC_NUMBER; }
     int get_x() { return this->position.x; }
     int get_y() { return this->position.y; }

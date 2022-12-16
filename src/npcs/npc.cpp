@@ -1,9 +1,13 @@
 #include "npc.hpp"
 
-NPC::NPC(int x, int y)
+#include <iostream>
+
+NPC::NPC(int x, int y, int initialization_tile)
 {
     this->position.x = x;
     this->position.y = y;
+
+    std::cout << initialization_tile << std::endl;
 }
 
 NPC_Animation_Generic_Animal::NPC_Animation_Generic_Animal(int w, int n, int e, int s)

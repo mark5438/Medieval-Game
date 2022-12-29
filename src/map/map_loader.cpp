@@ -14,6 +14,8 @@ Map::Map(const char *file_path)
     this->initialize_tilesets();
     this->initialize_layers();
 
+    this->doc.clear();
+
     // TODO: Find better way
     // For whatever reason, if I parse an xml file while another file is open,
     // The previous files data is corrupted

@@ -2,6 +2,7 @@
 
 Frame::Frame(int tileid, int duration)
 {
+    printf("%d\n", tileid);
     this->tile_id = tileid;
     this->duration = duration;
 }

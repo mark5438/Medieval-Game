@@ -30,6 +30,7 @@ void Tileset::init()
     this->image_width = atoi(image_node->first_attribute("width", 5)->value());
     this->image_height = atoi(image_node->first_attribute("height", 6)->value());
 
+    this->doc.clear();
     this->load_image();
     this->read_tiles();
 }
